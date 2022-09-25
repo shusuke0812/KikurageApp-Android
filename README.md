@@ -30,7 +30,7 @@ comming soon
 
 ## Development
 - MacOS Monterey 12.3.1 / MacBook Intel Processor Model
-- Visula Studio Code 1.71.0
+- Visual Studio Code 1.71.0
 - node 16.14.0
 - npm 8.3.1 / yarn 1.22.17
 - iOS
