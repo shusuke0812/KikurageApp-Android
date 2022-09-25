@@ -25,15 +25,22 @@ Moblie App parts of this IoT product can be monitoring and observing to Kikurage
 2. Can record Kikurage cultivating condition with using photo, memo and date.
 3. Can ask the other users in Facebook group.
 
-![ui](https://user-images.githubusercontent.com/33107697/160155691-1730da8b-0ea7-4f0b-b703-7790fc54d552.png)
+#### UI  
+comming soon
 
 ## Development
-
-- Xcode 13.3.1 (13E500a)
-- Swift 5.6
-- CocoaPods 1.11.3
 - MacOS Monterey 12.3.1 / MacBook Intel Processor Model
-- Target OS：iOS 13.0
+- Visula Studio Code 1.71.0
+- node 16.14.0
+- npm 8.3.1 / yarn 1.22.17
+- iOS
+  - Xcode 13.3.1 (13E500a)
+  - CocoaPods 1.11.3
+  - Target OS：iOS 13.0
+- Android
+  - Android Studio 2020.3.1 Patch4
+  - Java 12.0.2
+  - Android SDK Platform 28（Google API 9.0）
 
 ## Author
 
