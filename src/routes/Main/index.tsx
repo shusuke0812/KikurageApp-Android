@@ -1,7 +1,11 @@
 import React from 'react';
-import {createStackNavigator, StackCardInterpolationProps} from '@react-navigation/stack';
-import {TOP, LOGIN, HOME, RECIPE} from '../../constants/path';
+import {
+  createStackNavigator,
+  StackCardInterpolationProps,
+} from '@react-navigation/stack';
+import {TOP, LOGIN, HOME, RECIPE, LOADING} from '../../constants/path';
 import {Top, Login, Home, Recipe} from '../../components/pages';
+import {Loading} from '../../components/pages/utility';
 import * as UiContext from '../../contexts/ui';
 
 const Stack = createStackNavigator();
@@ -26,7 +30,9 @@ function switchingAuthStatus(status: UiContext.Status) {
 function AuthWithRoutes() {
   const uiContext = React.useContext(UiContext.Context);
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      initialRouteName={LOADING}
+      screenOptions={{headerShown: false, cardStyleInterpolator: forFade}}>
       {uiContext.applicationState !== UiContext.Status.LOADING ? (
         switchingAuthStatus(uiContext.applicationState)
       ) : (

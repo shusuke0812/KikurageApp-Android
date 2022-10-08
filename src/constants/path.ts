@@ -17,3 +17,6 @@ export const CALENDAR = 'CALENDAR';
 export const GRAPH = 'GRAPH';
 export const SETTING = 'SETTING';
 export const DICTIONARY = 'DICTIONARY';
+
+// utility
+export const LOADING = 'LOADING';
