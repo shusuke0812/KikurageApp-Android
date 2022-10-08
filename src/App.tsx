@@ -1,14 +1,6 @@
 import React from 'react';
 import * as UiContext from './contexts/ui';
-import {View, Text, StyleSheet} from 'react-native';
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
+import Routes from './routes';
 
 function App() {
   const [applicationState, setApplicationState] = React.useState(
@@ -16,9 +8,7 @@ function App() {
   );
   return (
     <UiContext.Context.Provider value={{applicationState, setApplicationState}}>
-      <View style={styles.container}>
-        <Text>Kikurage</Text>
-      </View>
+      <Routes />
     </UiContext.Context.Provider>
   );
 }
