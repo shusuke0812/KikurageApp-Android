@@ -7,17 +7,17 @@ assignees: ''
 
 ---
 
-#### Description:
+## Description:
 
-#### Environment Information:
+## Environment Information:
 - App Version:
 - Device Name:
 - OS Version:
 
-#### Steps to reproduce:
+## Steps to reproduce:
 
-#### Expected behavior:
+## Expected behavior:
 
-#### Actual behavior:
+## Actual behavior:
 
-#### Additional context:
+## Additional context:
