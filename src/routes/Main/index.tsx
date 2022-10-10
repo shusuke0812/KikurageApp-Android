@@ -32,7 +32,7 @@ function AuthWithRoutes() {
   return (
     <Stack.Navigator
       initialRouteName={LOADING}
-      screenOptions={{headerShown: false, cardStyleInterpolator: forFade}}>
+      screenOptions={{headerShown: true, cardStyleInterpolator: forFade}}>
       {uiContext.applicationState !== UiContext.Status.LOADING ? (
         switchingAuthStatus(uiContext.applicationState)
       ) : (
