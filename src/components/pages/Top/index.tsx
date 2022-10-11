@@ -1,5 +1,7 @@
 import React from 'react';
-import {View, StyleSheet, Text} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {View, StyleSheet} from 'react-native';
+import {PrimaryButton, SecondaryButton} from '../../atoms';
 
 const styles = StyleSheet.create({
   container: {
@@ -7,12 +9,26 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  button: {
+    marginTop: 40,
+    width: 340,
+  },
 });
 
 export default function Top() {
+  const {navigate} = useNavigation();
   return (
     <View style={styles.container}>
-      <Text>Top</Text>
+      <PrimaryButton
+        onPress={() => navigate()}
+        style={styles.button}
+        titleLabel="ログイン"
+      />
+      <SecondaryButton
+        onPress={() => navigate()}
+        style={styles.button}
+        titleLabel="新規ユーザー登録"
+      />
     </View>
   );
 }
