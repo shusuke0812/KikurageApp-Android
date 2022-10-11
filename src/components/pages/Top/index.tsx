@@ -3,6 +3,7 @@ import {useNavigation} from '@react-navigation/native';
 import {View, StyleSheet} from 'react-native';
 import {PrimaryButton, SecondaryButton, Logo} from '../../atoms';
 import logoImage from '../../../../assets/kikurage_device.jpg';
+import {BUTTON_WIDTH} from '../../../constants/component-size';
 
 const styles = StyleSheet.create({
   container: {
@@ -12,7 +13,7 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 40,
-    width: 340,
+    width: BUTTON_WIDTH,
   },
 });
 

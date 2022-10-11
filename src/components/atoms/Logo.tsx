@@ -1,14 +1,10 @@
 import React from 'react';
 import {Image, ImageSourcePropType, StyleSheet, ImageStyle} from 'react-native';
-import {width} from '../../lib/window';
-
-const edgeNumber = 2;
-const ratio = 3;
-const imageRatio = edgeNumber / ratio;
+import {LOGO_WIDTH} from '../../constants/component-size';
 
 const styles = StyleSheet.create({
   image: {
-    width: width * imageRatio,
+    width: LOGO_WIDTH,
     flex: 1,
     resizeMode: 'contain',
   },
