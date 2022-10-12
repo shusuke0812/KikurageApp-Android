@@ -8,11 +8,11 @@ import {BUTTON_WIDTH} from '../../../constants/component-size';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
   },
   button: {
-    marginTop: 40,
+    margin: 20,
     width: BUTTON_WIDTH,
   },
 });
