@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   createStackNavigator,
-  HeaderStyleInterpolators,
   StackCardInterpolationProps,
 } from '@react-navigation/stack';
 import {TOP, LOGIN, HOME, RECIPE, LOADING} from '../../constants/path';
