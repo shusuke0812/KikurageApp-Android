@@ -25,12 +25,12 @@ export default function Top() {
       <PrimaryButton
         onPress={() => navigate()}
         style={styles.button}
-        titleLabel="ログイン"
+        titleLabel="Login"
       />
       <SecondaryButton
         onPress={() => navigate()}
         style={styles.button}
-        titleLabel="新規ユーザー登録"
+        titleLabel="SignUp"
       />
     </View>
   );
