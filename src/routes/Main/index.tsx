@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   createStackNavigator,
+  HeaderStyleInterpolators,
   StackCardInterpolationProps,
 } from '@react-navigation/stack';
 import {TOP, LOGIN, HOME, RECIPE, LOADING} from '../../constants/path';
@@ -32,7 +33,11 @@ function AuthWithRoutes() {
   return (
     <Stack.Navigator
       initialRouteName={LOADING}
-      screenOptions={{headerShown: true, cardStyleInterpolator: forFade}}>
+      screenOptions={{
+        headerShown: true,
+        cardStyleInterpolator: forFade,
+        headerTitleAlign: 'center',
+      }}>
       {uiContext.applicationState !== UiContext.Status.LOADING ? (
         switchingAuthStatus(uiContext.applicationState)
       ) : (
