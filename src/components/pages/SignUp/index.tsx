@@ -9,10 +9,10 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function SingUp() {
+export default function SignUp() {
   return (
     <View style={styles.container}>
-      <Text>SingUp</Text>
+      <Text>SignUp</Text>
     </View>
   );
 }
