@@ -1,6 +1,7 @@
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {View, StyleSheet} from 'react-native';
+import {LOGIN, SIGN_UP} from '../../../constants/path';
 import {PrimaryButton, SecondaryButton, Logo} from '../../atoms';
 import logoImage from '../../../../assets/kikurage_device.jpg';
 import {BUTTON_WIDTH} from '../../../constants/component-size';
@@ -18,17 +19,17 @@ const styles = StyleSheet.create({
 });
 
 export default function Top() {
-  const {navigate} = useNavigation();
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <Logo image={logoImage} />
       <PrimaryButton
-        onPress={() => navigate()}
+        onPress={() => navigation.navigate(LOGIN)}
         style={styles.button}
         titleLabel="Login"
       />
       <SecondaryButton
-        onPress={() => navigate()}
+        onPress={() => navigation.navigate(SIGN_UP)}
         style={styles.button}
         titleLabel="SignUp"
       />
