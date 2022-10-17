@@ -36,7 +36,6 @@ function AuthWithRoutes() {
       screenOptions={{
         headerShown: false,
         cardStyleInterpolator: forFade,
-        headerTitleAlign: 'center',
       }}>
       {uiContext.applicationState !== UiContext.Status.LOADING ? (
         switchingAuthStatus(uiContext.applicationState)
