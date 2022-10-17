@@ -34,7 +34,7 @@ function AuthWithRoutes() {
     <Stack.Navigator
       initialRouteName={LOADING}
       screenOptions={{
-        headerShown: true,
+        headerShown: false,
         cardStyleInterpolator: forFade,
         headerTitleAlign: 'center',
       }}>

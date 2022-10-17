@@ -9,7 +9,8 @@ function TopNavigator() {
     <Stack.Navigator
       initialRouteName={TOP}
       screenOptions={{
-        headerShown: false,
+        headerShown: true,
+        headerTitleAlign: 'center',
       }}>
       <Stack.Screen name={TOP} component={Top} />
       <Stack.Screen name={LOGIN} component={Login} />
