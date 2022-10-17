@@ -3,9 +3,9 @@ import {
   createStackNavigator,
   StackCardInterpolationProps,
 } from '@react-navigation/stack';
-import {TOP, HOME, RECIPE, LOADING} from '../../constants/path';
-import {Home, Recipe} from '../../components/pages';
+import {TOP, HOME, LOADING} from '../../constants/path';
 import Top from './Top';
+import Home from './Home';
 import {Loading} from '../../components/pages/utility';
 import * as UiContext from '../../contexts/ui';
 
