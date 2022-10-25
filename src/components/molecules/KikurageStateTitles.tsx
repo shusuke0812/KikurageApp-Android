@@ -25,7 +25,7 @@ interface Props {
   subTitleLabel: string;
 }
 
-export default function TitleHeader(props: Props) {
+export default function KikurageStateTitles(props: Props) {
   const {titleLabel, subTitleLabel} = props;
 
   return (
