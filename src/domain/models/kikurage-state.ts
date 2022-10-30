@@ -19,3 +19,20 @@ export function factory(kikurageState: Model): Model {
     advice: kikurageState.advice,
   };
 }
+
+enum StateType {
+  NORMAL = 'normal',
+  WET = 'wet',
+  DRY = 'dry',
+}
+
+export function type(kikurageState: Model): StateType {
+  const typeString = kikurageState.typeString;
+  if (typeString === StateType.NORMAL) {
+    return StateType.NORMAL;
+  } else if (typeString === StateType.WET) {
+    return StateType.WET;
+  } else {
+    return StateType.DRY;
+  }
+}
