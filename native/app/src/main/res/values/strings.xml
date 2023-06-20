@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Kikurage</string>
+
+    <string name="fragment_top_title">ようこそ</string>
+    <string name="fragment_login_title">ログイン</string>
+    <string name="fragment_home_title">ホーム</string>
 </resources>
