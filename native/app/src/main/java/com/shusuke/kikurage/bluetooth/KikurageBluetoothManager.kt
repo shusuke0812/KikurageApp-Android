@@ -11,17 +11,17 @@ import com.shusuke.kikurage.bluetooth.entity.PairedDevice
 import com.shusuke.kikurage.bluetooth.entity.PairedDeviceList
 
 class KikurageBluetoothManager(
-    private val bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
+    private val _bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
 ) {
     fun isSupported(): Boolean {
-        return bluetoothAdapter == null
+        return _bluetoothAdapter == null
     }
     fun hasPermission(context: Context): Boolean {
         return ActivityCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED
     }
     @RequiresPermission(value = "android.permission.BLUETOOTH_CONNECT")
     fun getPairedDevices(): PairedDeviceList {
-        val pairedDevice = bluetoothAdapter?.bondedDevices
+        val pairedDevice = _bluetoothAdapter?.bondedDevices
         val pairedDeviceList = PairedDeviceList()
 
         pairedDevice?.forEach { device ->
