@@ -13,6 +13,7 @@ import com.shusuke.kikurage.bluetooth.entity.PairedDeviceList
 class KikurageBluetoothManager(
     private val _bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
 ) {
+    //region Config
     fun isSupported(): Boolean {
         return _bluetoothAdapter == null
     }
@@ -32,4 +33,5 @@ class KikurageBluetoothManager(
         }
         return pairedDeviceList
     }
+    //endregion
 }
