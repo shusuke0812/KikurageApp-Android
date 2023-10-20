@@ -14,9 +14,13 @@ import com.shusuke.kikurage.bluetooth.entity.DiscoveredDevice
 import com.shusuke.kikurage.bluetooth.entity.PairedDevice
 import com.shusuke.kikurage.bluetooth.entity.PairedDeviceList
 
+interface KikurageBluetoothManagerDelegate {
+    fun didDiscoverDevice(manager: KikurageBluetoothManager, device: DiscoveredDevice)
+}
 class KikurageBluetoothManager(
-    private val _bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
-) {
+    private val _bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter(),
+    val delegate: KikurageBluetoothManagerDelegate
+) : KikurageBluetoothManagerDelegate by delegate {
     //region Config
     fun isSupported(): Boolean {
         return _bluetoothAdapter == null
@@ -55,6 +59,7 @@ class KikurageBluetoothManager(
                     val deviceName = device?.name ?: ""
                     val deviceMacAddress = device?.address ?: ""
                     val discoveredDevice = DiscoveredDevice(name = deviceName, macAddress = deviceMacAddress)
+                    delegate.didDiscoverDevice(this@KikurageBluetoothManager, discoveredDevice)
                 }
             }
         }
