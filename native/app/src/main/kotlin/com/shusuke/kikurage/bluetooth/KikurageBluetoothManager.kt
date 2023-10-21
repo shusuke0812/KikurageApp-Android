@@ -25,7 +25,7 @@ class KikurageBluetoothManager(
 ) {
     //region Config
     fun isSupported(): Boolean {
-        return _bluetoothAdapter == null
+        return _bluetoothAdapter != null
     }
     fun hasPermission(context: Context): Boolean {
         return ActivityCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED
