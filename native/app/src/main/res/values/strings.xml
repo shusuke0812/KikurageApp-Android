@@ -8,6 +8,8 @@
 
     <!-- Login -->
     <string name="fragment_login_title">ログイン</string>
+    <string name="fragment_login_email_edittext_hit">メールアドレス</string>
+    <string name="fragment_login_password_edittext_hit">パスワード</string>
 
     <!-- Home -->
     <string name="fragment_home_title">ホーム</string>
