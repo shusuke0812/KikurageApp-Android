@@ -7,6 +7,7 @@
         <item name="colorSecondary">#DC4B5E</item>
         <item name="colorOnSecondary">@color/white</item>
         <item name="android:windowBackground">#F2F2F7</item>
+        <item name="android:statusBarColor">?attr/colorSecondary</item>
     </style>
 
     <style name="roundedCornersImageView" parent="">
