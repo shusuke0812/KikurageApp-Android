@@ -57,6 +57,8 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-moshi:$retrofit_version"
 
+    implementation "com.michael-bull.kotlin-result:kotlin-result:1.1.18"
+
     // Firebase
     implementation platform("com.google.firebase:firebase-bom:32.3.1")
     implementation "com.google.firebase:firebase-auth-ktx"
