@@ -2,7 +2,7 @@
     <string name="app_name">Kikurage</string>
 
     <!-- Top -->
-    <string name="fragment_top_title">ようこそ</string>
+    <string name="fragment_top_title">ようこそ！</string>
     <string name="login_button_title">ログイン</string>
     <string name="signup_button_title">新規ユーザー登録</string>
 
