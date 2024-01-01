@@ -1,14 +1,12 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Kikurage" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
-        <!--
+    <style name="Theme.Kikurage" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">#FEE1E1</item>
+        <item name="colorPrimaryVariant">@color/black</item>
         <item name="colorOnPrimary">@color/black</item>
         <item name="colorSecondary">#DC4B5E</item>
         <item name="colorOnSecondary">@color/white</item>
         <item name="android:windowBackground">#F2F2F7</item>
-        <item name="android:statusBarColor">#F2F2F7</item>
-        -->
     </style>
 
     <style name="roundedCornersImageView" parent="">
