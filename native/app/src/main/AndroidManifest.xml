@@ -9,14 +9,12 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Kikurage"
-        tools:targetApi="31">
+        android:theme="@style/Theme.Kikurage">
         <activity
             android:name=".AppRootActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
