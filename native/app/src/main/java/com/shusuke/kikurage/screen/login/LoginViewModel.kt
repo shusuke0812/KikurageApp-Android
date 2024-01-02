@@ -1,6 +1,5 @@
 package com.shusuke.kikurage.screen.login
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.github.michaelbull.result.mapBoth
@@ -9,6 +8,7 @@ import com.shusuke.kikurage.repository.LoginRepositoryInterface
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class LoginViewModel(
     private val loginRepository: LoginRepositoryInterface = LoginRepository()
@@ -20,8 +20,8 @@ class LoginViewModel(
         viewModelScope.launch {
             loginRepository.login(email, password)
                 .mapBoth(
-                    success = { Log.d("test", "success to login") },
-                    failure = { Log.d("test", "fail to login") }
+                    success = { Timber.d("success to login") },
+                    failure = { Timber.d("fail to login") }
                 )
         }
 
