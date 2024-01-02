@@ -25,15 +25,15 @@ class LoginViewModel @Inject constructor(
         viewModelScope.launch {
             loginRepository.login(email, password)
                 .mapBoth(
-                    success = { _uiState.update { currentState -> currentState.copy(isLogin = true, error = null) } },
-                    failure = { _uiState.update { currentState -> currentState.copy(isLogin = false, error = LoginError.LOGIN_FAILURE) } }
+                    success = { _uiState.update { it.copy(isLogin = true, error = null) } },
+                    failure = { _uiState.update { it.copy(isLogin = false, error = LoginError.LOGIN_FAILURE) } }
                 )
         }
     }
 
     private fun validateLogin(email: String, password: String) : Boolean {
         return if (email.isEmpty() || password.isEmpty()) {
-            _uiState.update { currentState -> currentState.copy(isLogin = false, error = LoginError.VALIDATE_ERROR) }
+            _uiState.update { it.copy(isLogin = false, error = LoginError.VALIDATE_ERROR) }
             false
         } else {
             true
