@@ -11,12 +11,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import java.lang.Exception
+import javax.inject.Inject
 
 interface LoginRepositoryInterface {
     suspend fun login(email: String, password: String) : Result<LoginUser, Error>
 }
 
-class LoginRepository : LoginRepositoryInterface {
+class LoginRepository @Inject constructor() : LoginRepositoryInterface {
     private val _auth = Firebase.auth
 
     override suspend fun login(email: String, password: String) : Result<LoginUser, Error> {
