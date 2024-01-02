@@ -1,12 +1,18 @@
 buildscript {
-    ext.kotlin_version = "1.9.0" // release info -> https://kotlinlang.org/docs/releases.html#release-details
+    ext.versions = [
+            "kotlin": "1.9.0", // release info -> https://kotlinlang.org/docs/releases.html#release-details.
+            "hilt": "2.50"
+    ]
+
     repositories {
         google()
         jcenter()
+        mavenCentral()
     }
     dependencies {
         classpath "com.android.tools.build:gradle:8.0.2"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}"
+        classpath "com.google.dagger:hilt-android-gradle-plugin:${versions.hilt}"
 
         def nav_version = "2.5.3"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
@@ -15,7 +21,6 @@ buildscript {
 
 plugins {
     id 'com.google.gms.google-services' version '4.4.0' apply false
-    id 'com.google.dagger.hilt.android' version "2.44" apply false
 }
 
 task clean(type: Delete) {
