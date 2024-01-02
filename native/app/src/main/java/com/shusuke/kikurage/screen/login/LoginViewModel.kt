@@ -17,6 +17,9 @@ class LoginViewModel(
     val uiState: StateFlow<LoginUiState> = _uiState
 
     fun login(email: String, password: String) {
+        if (!validateLogin(email, password)) {
+            return
+        }
         viewModelScope.launch {
             loginRepository.login(email, password)
                 .mapBoth(
@@ -26,8 +29,13 @@ class LoginViewModel(
         }
     }
 
-    private fun validateLogin() {
-        // TODO: validate email and password inputs
+    private fun validateLogin(email: String, password: String) : Boolean {
+        return if (email.isEmpty() || password.isEmpty()) {
+            _uiState.update { currentState -> currentState.copy(isLogin = false, error = LoginError.VALIDATE_ERROR) }
+            false
+        } else {
+            true
+        }
     }
 }
 
