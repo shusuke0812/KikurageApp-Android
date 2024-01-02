@@ -7,8 +7,8 @@ import com.shusuke.kikurage.repository.LoginRepository
 import com.shusuke.kikurage.repository.LoginRepositoryInterface
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 class LoginViewModel(
     private val loginRepository: LoginRepositoryInterface = LoginRepository()
@@ -20,14 +20,23 @@ class LoginViewModel(
         viewModelScope.launch {
             loginRepository.login(email, password)
                 .mapBoth(
-                    success = { Timber.d("success to login") },
-                    failure = { Timber.d("fail to login") }
+                    success = { _uiState.update { currentState -> currentState.copy(isLogin = true, error = null) } },
+                    failure = { _uiState.update { currentState -> currentState.copy(isLogin = false, error = LoginError.LOGIN_FAILURE) } }
                 )
         }
+    }
 
+    private fun validateLogin() {
+        // TODO: validate email and password inputs
     }
 }
 
 data class LoginUiState(
-    val isLogin: Boolean = false
+    val isLogin: Boolean = false,
+    val error: LoginError? = null
 )
+
+enum class LoginError {
+    VALIDATE_ERROR,
+    LOGIN_FAILURE
+}
