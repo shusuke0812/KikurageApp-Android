@@ -1,16 +1,16 @@
 package com.shusuke.kikurage.screen.login
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.shusuke.kikurage.AppRootActivity
 import com.shusuke.kikurage.R
 import com.shusuke.kikurage.databinding.FragmentLoginBinding
-import timber.log.Timber
+import kotlinx.coroutines.launch
 
 class LoginFragment : Fragment() {
 
@@ -34,6 +34,17 @@ class LoginFragment : Fragment() {
             val email = binding.emailEdittext.text.toString()
             val password = binding.passwordEdittext.text.toString()
             viewModel.login(email = email, password = password)
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.uiState.collect { uiState ->
+                if (uiState.isLogin) {
+                    findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                }
+                if (uiState.error != null) {
+                    // TODO: show error message using dialog
+                }
+            }
         }
     }
 }
