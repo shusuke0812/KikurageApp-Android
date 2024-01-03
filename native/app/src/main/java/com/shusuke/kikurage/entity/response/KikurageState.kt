@@ -1,9 +1,11 @@
 package com.shusuke.kikurage.entity.response
 
+import com.google.firebase.firestore.PropertyName
+
 data class KikurageState (
-    val temperature: Int,
-    val humidity: Int,
-    val message: String,
-    val typeString: String,
-    val advice: String
+    @PropertyName("temperature") val temperature: Int = 0,
+    @PropertyName("humidity") val humidity: Int = 0,
+    @PropertyName("message") val message: String = "",
+    @PropertyName("judge") val typeString: String = "",
+    @PropertyName("advice") val advice: String = ""
 )
