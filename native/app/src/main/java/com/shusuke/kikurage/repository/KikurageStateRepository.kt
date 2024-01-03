@@ -12,12 +12,13 @@ import com.shusuke.kikurage.entity.response.KikurageState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
 interface KikurageStateRepositoryInterface {
     suspend fun getKikurageState(productId: String): Result<KikurageState, Error>
 }
 
-class KikurageStateRepository : KikurageStateRepositoryInterface {
+class KikurageStateRepository @Inject constructor() : KikurageStateRepositoryInterface {
     private val _firestore = Firebase.firestore
 
     override suspend fun getKikurageState(productId: String):  Result<KikurageState, Error> {
