@@ -6,6 +6,8 @@ import com.shusuke.kikurage.repository.KikurageUserRepository
 import com.shusuke.kikurage.repository.KikurageUserRepositoryInterface
 import com.shusuke.kikurage.repository.LoginRepository
 import com.shusuke.kikurage.repository.LoginRepositoryInterface
+import com.shusuke.kikurage.usecase.LoadKikurageStateWithUserUseCase
+import com.shusuke.kikurage.usecase.LoadKikurageStateWithUserUseCaseInterface
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -26,4 +28,12 @@ abstract class RepositoryModule {
     @Singleton
     @Binds
     abstract fun bindKikurageStateRepositoryInterface(kikurageStateRepository: KikurageStateRepository): KikurageStateRepositoryInterface
+}
+
+@Module
+@InstallIn(SingletonComponent::class)
+abstract class UseCaseModule {
+    @Singleton
+    @Binds
+    abstract fun loadKikurageStateWithUserUseCaseInterface(loadKikurageStateWithUserUseCase : LoadKikurageStateWithUserUseCase) : LoadKikurageStateWithUserUseCaseInterface
 }
