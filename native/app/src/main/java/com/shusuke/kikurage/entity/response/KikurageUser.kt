@@ -4,6 +4,8 @@ import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.PropertyName
 import java.util.Date
 
+// NOTE: To avoid decode exception, have to set up default values
+
 data class KikurageUser(
     @PropertyName("productKey") val productKey: String = "",
     @PropertyName("kikurageName") val kikurageName: String = "",
