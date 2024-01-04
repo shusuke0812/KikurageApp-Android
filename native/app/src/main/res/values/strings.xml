@@ -13,4 +13,7 @@
 
     <!-- Home -->
     <string name="fragment_home_title">ホーム</string>
+
+    <!-- Menu -->
+    <string name="menu_wifi_setting_title">WiFi設定</string>
 </resources>
