@@ -17,14 +17,12 @@ class TopFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        (activity as AppRootActivity).setupToolbarTitle(R.string.fragment_top_title)
         return inflater.inflate(R.layout.fragment_top, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        // Toolbar
-        (activity as AppRootActivity).setupToolbarTitle(R.string.fragment_top_title)
 
         // Transition
         val loginButton = view.findViewById<Button>(R.id.login_button)

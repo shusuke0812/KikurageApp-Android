@@ -24,6 +24,7 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        (activity as AppRootActivity).setupToolbarTitle(R.string.fragment_login_title)
         return inflater.inflate(R.layout.fragment_login, container, false)
     }
 
@@ -32,7 +33,6 @@ class LoginFragment : Fragment() {
 
         viewModel = ViewModelProvider(requireActivity())[LoginViewModel::class.java]
         binding = FragmentLoginBinding.bind(view)
-        (activity as AppRootActivity).setupToolbarTitle(R.string.fragment_login_title)
 
         binding.loginButton.setOnClickListener {
             val email = binding.emailEdittext.text.toString()
