@@ -2,8 +2,10 @@ package com.shusuke.kikurage
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.TextView
-import androidx.appcompat.widget.Toolbar
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.appbar.MaterialToolbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -17,13 +19,17 @@ class AppRootActivity : AppCompatActivity() {
 
     // Call this method on each fragments
     fun setupToolbarTitle(id: Int) {
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        val toolbarTitleTextView = toolbar.findViewById<TextView>(R.id.toolbar_title)
-        toolbarTitleTextView?.setText(id)
+        supportActionBar?.setTitle(id)
     }
 
     private fun setupToolbar() {
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
+
+        val navController = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
+        navController?.findNavController()?.let {
+            val appBarConfiguration = AppBarConfiguration(it.graph)
+            toolbar.setupWithNavController(it, appBarConfiguration)
+        }
     }
 }
