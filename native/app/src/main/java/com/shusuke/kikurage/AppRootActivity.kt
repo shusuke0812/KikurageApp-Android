@@ -15,6 +15,7 @@ class AppRootActivity : AppCompatActivity() {
         setupToolbar()
     }
 
+    // Call this method on each fragments
     fun setupToolbarTitle(id: Int) {
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         val toolbarTitleTextView = toolbar.findViewById<TextView>(R.id.toolbar_title)
