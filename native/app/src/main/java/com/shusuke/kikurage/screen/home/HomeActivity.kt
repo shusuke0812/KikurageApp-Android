@@ -8,13 +8,20 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.appbar.MaterialToolbar
 import com.shusuke.kikurage.R
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
         setupToolbar()
+    }
+
+    // Call this method on each fragments
+    fun setupToolbarTitle(id: Int) {
+        supportActionBar?.setTitle(id)
     }
 
     private fun setupToolbar() {
