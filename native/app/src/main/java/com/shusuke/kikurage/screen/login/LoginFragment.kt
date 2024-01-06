@@ -43,7 +43,7 @@ class LoginFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.uiState.collect { uiState ->
                 if (uiState.isLogin) {
-                    findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                    findNavController().navigate(R.id.action_loginFragment_return_to_topFragment)
                 }
                 if (uiState.error != null) {
                     // TODO: show error message using dialog
