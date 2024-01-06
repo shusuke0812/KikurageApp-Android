@@ -26,7 +26,7 @@ class AppRootActivity : AppCompatActivity() {
         val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        val navController = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
+        val navController = supportFragmentManager.findFragmentById(R.id.auth_navigation_host_fragment)
         navController?.findNavController()?.let {
             val appBarConfiguration = AppBarConfiguration(it.graph)
             toolbar.setupWithNavController(it, appBarConfiguration)
