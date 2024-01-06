@@ -1,11 +1,13 @@
 package com.shusuke.kikurage
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.appbar.MaterialToolbar
+import com.shusuke.kikurage.screen.home.HomeActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -31,5 +33,13 @@ class AppRootActivity : AppCompatActivity() {
             val appBarConfiguration = AppBarConfiguration(it.graph)
             toolbar.setupWithNavController(it, appBarConfiguration)
         }
+    }
+
+    private fun showHomeScreen() {
+        val intentToHome = Intent(this@AppRootActivity, HomeActivity::class.java)
+        // TODO: ↓
+        //intentToHome.putExtra("kikurageUser", viewModel.kikurageUser)
+        //intentToHome.putExtra("kikurageState", viewModel.kikurageState)
+        startActivity(intentToHome)
     }
 }
