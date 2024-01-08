@@ -11,13 +11,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Kikurage">
         <activity
-            android:name=".AppRootActivity"
+            android:name=".screen.home.HomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".app.AppRootActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

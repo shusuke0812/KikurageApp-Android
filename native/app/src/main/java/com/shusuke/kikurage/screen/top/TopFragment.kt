@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.fragment.findNavController
-import com.shusuke.kikurage.AppRootActivity
 import com.shusuke.kikurage.R
 
 class TopFragment : Fragment() {
@@ -17,7 +16,6 @@ class TopFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        (activity as AppRootActivity).setupToolbarTitle(R.string.fragment_top_title)
         return inflater.inflate(R.layout.fragment_top, container, false)
     }
 

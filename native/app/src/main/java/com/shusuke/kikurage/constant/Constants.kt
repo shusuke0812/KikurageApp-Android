@@ -8,4 +8,7 @@ object Constants {
         const val CULTIVATIONS = "cultivations"
         const val RECIPES = "recipes"
     }
+    object ProtoDataStore {
+        const val LOGIN_USER_FILE_NAME = "login_user_prefs.pb"
+    }
 }

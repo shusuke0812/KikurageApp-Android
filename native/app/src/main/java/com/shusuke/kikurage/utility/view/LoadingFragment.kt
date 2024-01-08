@@ -1,4 +1,4 @@
-package com.shusuke.kikurage.screen.home
+package com.shusuke.kikurage.utility.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,13 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import com.shusuke.kikurage.R
 
-class HomeFragment : Fragment() {
+// TODO: implementation
+class LoadingFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        return inflater.inflate(R.layout.fragment_loading, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
