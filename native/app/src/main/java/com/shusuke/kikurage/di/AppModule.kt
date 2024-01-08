@@ -40,7 +40,7 @@ object AppModule {
             serializer = loginUserPrefsSerializer,
             scope = CoroutineScope(Dispatchers.IO + SupervisorJob()),
         ) {
-            context.dataStoreFile(Constants.DataStore.LOGIN_USER_FILE_NAME)
+            context.dataStoreFile(Constants.ProtoDataStore.LOGIN_USER_FILE_NAME)
         }
     }
 }
