@@ -14,7 +14,7 @@
             android:name=".screen.home.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".AppRootActivity"
+            android:name=".app.AppRootActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
