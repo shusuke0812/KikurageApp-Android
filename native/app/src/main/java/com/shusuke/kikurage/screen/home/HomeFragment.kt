@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.shusuke.kikurage.AppRootActivity
 import com.shusuke.kikurage.R
 
 class HomeFragment : Fragment() {

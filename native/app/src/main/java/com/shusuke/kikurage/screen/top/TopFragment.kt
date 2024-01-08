@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.fragment.findNavController
-import com.shusuke.kikurage.AppRootActivity
+import com.shusuke.kikurage.app.AppRootActivity
 import com.shusuke.kikurage.R
 
 class TopFragment : Fragment() {
