@@ -43,14 +43,15 @@ class LoginViewModel @Inject constructor(
             true
         }
     }
+
+    data class LoginUiState(
+        val isLogin: Boolean = false,
+        val error: LoginError? = null
+    )
+
+    enum class LoginError {
+        VALIDATE_ERROR,
+        LOGIN_FAILURE
+    }
 }
 
-data class LoginUiState(
-    val isLogin: Boolean = false,
-    val error: LoginError? = null
-)
-
-enum class LoginError {
-    VALIDATE_ERROR,
-    LOGIN_FAILURE
-}
