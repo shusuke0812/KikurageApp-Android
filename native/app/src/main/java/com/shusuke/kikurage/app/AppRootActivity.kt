@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.appbar.MaterialToolbar
 import com.shusuke.kikurage.screen.home.HomeActivity
 import com.shusuke.kikurage.R
@@ -33,11 +33,6 @@ class AppRootActivity : AppCompatActivity() {
         }
     }
 
-    // Call this method on each fragments
-    fun setupToolbarTitle(id: Int) {
-        supportActionBar?.setTitle(id)
-    }
-
     private fun setupToolbar() {
         val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -46,7 +41,13 @@ class AppRootActivity : AppCompatActivity() {
         val navController =navHostFragment?.findNavController()
         navController?.let {
             val appBarConfiguration = AppBarConfiguration(it.graph)
-            setupActionBarWithNavController(it, appBarConfiguration)
+            toolbar.setupWithNavController(it, appBarConfiguration)
+        }
+        navController?.addOnDestinationChangedListener { _, destination, _ ->
+            when(destination.id) {
+                R.id.topFragment -> supportActionBar?.setTitle(R.string.fragment_top_title)
+                R.id.loginFragment -> supportActionBar?.setTitle(R.string.fragment_login_title)
+            }
         }
     }
 

@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.shusuke.kikurage.app.AppRootActivity
 import com.shusuke.kikurage.R
 import com.shusuke.kikurage.databinding.FragmentLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,7 +23,6 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        (activity as AppRootActivity).setupToolbarTitle(R.string.fragment_login_title)
         return inflater.inflate(R.layout.fragment_login, container, false)
     }
 

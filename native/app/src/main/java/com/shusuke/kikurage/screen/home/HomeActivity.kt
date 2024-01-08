@@ -19,20 +19,21 @@ class HomeActivity : AppCompatActivity() {
         setupToolbar()
     }
 
-    // Call this method on each fragments
-    fun setupToolbarTitle(id: Int) {
-        supportActionBar?.setTitle(id)
-    }
-
     private fun setupToolbar() {
         val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
         val drawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.home_navigation_host_fragment)
-        navHostFragment?.findNavController()?.let {
+        val navController = navHostFragment?.findNavController()
+        navController?.let {
             val appBarConfiguration = AppBarConfiguration(setOf(R.id.homeFragment), drawerLayout)
             toolbar.setupWithNavController(it, appBarConfiguration)
+        }
+        navController?.addOnDestinationChangedListener { _, destination, _ ->
+            when(destination.id) {
+                R.id.homeFragment -> supportActionBar?.setTitle(R.string.fragment_home_title)
+            }
         }
     }
 }
