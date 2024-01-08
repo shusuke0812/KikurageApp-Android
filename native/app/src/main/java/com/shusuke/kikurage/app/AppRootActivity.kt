@@ -52,9 +52,6 @@ class AppRootActivity : AppCompatActivity() {
 
     private fun showHomeScreen() {
         val intentToHome = Intent(this@AppRootActivity, HomeActivity::class.java)
-        // TODO: ↓
-        //intentToHome.putExtra("kikurageUser", viewModel.kikurageUser)
-        //intentToHome.putExtra("kikurageState", viewModel.kikurageState)
         startActivity(intentToHome)
     }
 }
