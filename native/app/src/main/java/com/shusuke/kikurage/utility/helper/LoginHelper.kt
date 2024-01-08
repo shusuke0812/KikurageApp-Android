@@ -40,4 +40,10 @@ class LoginHelper @Inject constructor(
     }
 
     val isLogin: Flow<Boolean> = readUserFromDataStore().map { it -> it.isEmailVerified }
+
+    suspend fun removeUserFromDtaStore() {
+        dataStore.updateData {
+            it.toBuilder().clear().build()
+        }
+    }
 }
