@@ -7,6 +7,7 @@ import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.shusuke.kikurage.entity.response.LoginUser
+import com.shusuke.kikurage.utility.helper.LoginHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
@@ -17,7 +18,9 @@ interface LoginRepositoryInterface {
     suspend fun login(email: String, password: String) : Result<LoginUser, Error>
 }
 
-class LoginRepository @Inject constructor() : LoginRepositoryInterface {
+class LoginRepository @Inject constructor(
+    private val loginHelper: LoginHelper
+) : LoginRepositoryInterface {
     private val _auth = Firebase.auth
 
     override suspend fun login(email: String, password: String) : Result<LoginUser, Error> {
@@ -26,7 +29,9 @@ class LoginRepository @Inject constructor() : LoginRepositoryInterface {
             return@withContext if (authResult != null) {
                 val user = _auth.currentUser
                 user?.let {
-                    Ok(LoginUser(uid = user.uid, isEmailVerified = user.isEmailVerified))
+                    val loginUser = LoginUser(uid = it.uid, isEmailVerified = it.isEmailVerified)
+                    loginHelper.setLoginUserInDataStore(loginUser)
+                    Ok(loginUser)
                 } ?: Err(Error())
             } else {
                 Err(Error())
