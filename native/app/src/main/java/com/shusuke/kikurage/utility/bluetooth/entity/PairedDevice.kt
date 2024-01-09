@@ -1,4 +1,4 @@
-package com.shusuke.kikurage.bluetooth.entity
+package com.shusuke.kikurage.utility.bluetooth.entity
 
 data class PairedDevice(
     val name: String,

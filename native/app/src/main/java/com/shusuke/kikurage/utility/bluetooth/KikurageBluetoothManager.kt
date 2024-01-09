@@ -1,4 +1,4 @@
-package com.shusuke.kikurage.bluetooth
+package com.shusuke.kikurage.utility.bluetooth
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -9,9 +9,9 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.core.app.ActivityCompat
-import com.shusuke.kikurage.bluetooth.entity.DiscoveredDevice
-import com.shusuke.kikurage.bluetooth.entity.PairedDevice
-import com.shusuke.kikurage.bluetooth.entity.PairedDeviceList
+import com.shusuke.kikurage.utility.bluetooth.entity.DiscoveredDevice
+import com.shusuke.kikurage.utility.bluetooth.entity.PairedDevice
+import com.shusuke.kikurage.utility.bluetooth.entity.PairedDeviceList
 
 interface KikurageBluetoothManagerDelegate {
     fun didDiscoverDevice(manager: KikurageBluetoothManager, device: DiscoveredDevice)
