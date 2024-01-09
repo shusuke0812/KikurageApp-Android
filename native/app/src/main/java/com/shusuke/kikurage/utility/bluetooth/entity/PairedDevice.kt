@@ -2,7 +2,7 @@ package com.shusuke.kikurage.utility.bluetooth.entity
 
 data class PairedDevice(
     val name: String,
-    val serviceUUID: String
+    val macAddress: String
 )
 
 data class PairedDeviceList(
