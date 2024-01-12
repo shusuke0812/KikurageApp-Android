@@ -18,7 +18,6 @@ interface KikurageBluetoothManagerDelegate {
 }
 
 @SuppressLint("MissingPermission")
-@Suppress("unused")
 class KikurageBluetoothManager(
     private val _bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter(),
     var delegate: KikurageBluetoothManagerDelegate? = null
