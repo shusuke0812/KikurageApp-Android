@@ -3,8 +3,6 @@ package com.shusuke.kikurage.screen.home
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
@@ -46,7 +44,6 @@ class HomeActivity : AppCompatActivity() {
         val drawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
         val navigationView = findViewById<NavigationView>(R.id.navigation_view)
         navigationView.setNavigationItemSelectedListener {
-            var fragment: Fragment? = null
             when (it.itemId) {
                 R.id.drawer_menu_wifi_setting -> { transitionToMenuItem(R.id.action_homeDrawer_to_wifiSelectDeviceFragment) }
             }
