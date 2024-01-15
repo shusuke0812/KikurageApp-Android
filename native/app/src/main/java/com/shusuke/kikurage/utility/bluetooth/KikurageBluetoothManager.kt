@@ -27,6 +27,12 @@ class KikurageBluetoothManager(
     private fun isSupported(): Boolean {
         return _bluetoothAdapter != null && !_bluetoothAdapter.isEnabled
     }
+
+    /**
+     * Usage: In Fragment,
+     * val manager = KikurageBluetoothManager()
+     * manager.checkPermission(this.requireActivity())
+     */
     fun checkPermission(activity: Activity) {
         if (isSupported()) {
             val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
