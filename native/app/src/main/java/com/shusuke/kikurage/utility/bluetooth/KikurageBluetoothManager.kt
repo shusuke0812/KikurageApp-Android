@@ -1,7 +1,7 @@
 package com.shusuke.kikurage.utility.bluetooth
 
-import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.content.BroadcastReceiver
@@ -14,6 +14,7 @@ import com.shusuke.kikurage.utility.bluetooth.entity.PairedDevice
 import com.shusuke.kikurage.utility.bluetooth.entity.PairedDeviceList
 
 interface KikurageBluetoothManagerDelegate {
+    fun didFinishCheckPermissions(manage: KikurageBluetoothManager)
     fun didDiscoverDevice(manager: KikurageBluetoothManager, device: DiscoveredDevice)
 }
 
@@ -23,11 +24,26 @@ class KikurageBluetoothManager(
     var delegate: KikurageBluetoothManagerDelegate? = null
 ) {
     //region Config
-    fun isSupported(): Boolean {
-        return _bluetoothAdapter != null
+    private fun isSupported(): Boolean {
+        return _bluetoothAdapter != null && !_bluetoothAdapter.isEnabled
     }
-    fun hasPermission(context: Context): Boolean {
-        return ActivityCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED
+    fun checkPermission(activity: Activity) {
+        if (isSupported()) {
+            val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
+            if (ActivityCompat.checkSelfPermission(
+                    activity,
+                    android.Manifest.permission.BLUETOOTH_CONNECT
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                activity.requestPermissions(arrayOf(android.Manifest.permission.BLUETOOTH_CONNECT), 2)
+                delegate?.didFinishCheckPermissions(this)
+                return
+            }
+            activity.startActivityForResult(enableBtIntent, 1)
+            delegate?.didFinishCheckPermissions(this)
+            return
+        }
+        delegate?.didFinishCheckPermissions(this)
     }
     fun getPairedDevices(): PairedDeviceList {
         val pairedDevice = _bluetoothAdapter?.bondedDevices
