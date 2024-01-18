@@ -17,6 +17,7 @@ import com.shusuke.kikurage.usecase.LoadKikurageStateWithUserUseCase
 import com.shusuke.kikurage.usecase.LoadKikurageStateWithUserUseCaseInterface
 import com.shusuke.kikurage.utility.LoginUserPrefsSerializer
 import com.shusuke.kikurage.utility.bluetooth.KikurageBluetoothManager
+import com.shusuke.kikurage.utility.bluetooth.KikurageBluetoothManagerInterface
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -49,16 +50,6 @@ object AppModule {
 
 @Module
 @InstallIn(SingletonComponent::class)
-object BluetoothModule {
-    @Singleton
-    @Provides
-    fun provideBluetoothManager(viewModel: ViewModel): KikurageBluetoothManager {
-        return KikurageBluetoothManager()
-    }
-}
-
-@Module
-@InstallIn(SingletonComponent::class)
 abstract class RepositoryModule {
     @Singleton
     @Binds
@@ -79,4 +70,12 @@ abstract class UseCaseModule {
     @Singleton
     @Binds
     abstract fun loadKikurageStateWithUserUseCaseInterface(loadKikurageStateWithUserUseCase : LoadKikurageStateWithUserUseCase) : LoadKikurageStateWithUserUseCaseInterface
+}
+
+@Module
+@InstallIn(SingletonComponent::class)
+abstract class BluetoothModule {
+    @Singleton
+    @Binds
+    abstract fun bindBluetoothManagerInterface(bluetoothManager: KikurageBluetoothManager): KikurageBluetoothManagerInterface
 }

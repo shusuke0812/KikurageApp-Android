@@ -13,16 +13,20 @@ import com.shusuke.kikurage.utility.bluetooth.entity.DiscoveredDevice
 import com.shusuke.kikurage.utility.bluetooth.entity.PairedDevice
 import com.shusuke.kikurage.utility.bluetooth.entity.PairedDeviceList
 import javax.inject.Inject
-import javax.inject.Singleton
+
+interface KikurageBluetoothManagerInterface {
+    fun checkPermission(activity: Activity)
+    fun getPairedDevices(): PairedDeviceList
+    fun scanForPeripherals()
+}
 
 interface KikurageBluetoothManagerDelegate {
     fun didFinishCheckPermissions(manage: KikurageBluetoothManager)
     fun didDiscoverDevice(manager: KikurageBluetoothManager, device: DiscoveredDevice)
 }
 
-@Singleton
 @SuppressLint("MissingPermission")
-class KikurageBluetoothManager @Inject constructor() {
+class KikurageBluetoothManager @Inject constructor() : KikurageBluetoothManagerInterface {
     private val _bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
     var delegate: KikurageBluetoothManagerDelegate? = null
     //region Config
@@ -35,7 +39,7 @@ class KikurageBluetoothManager @Inject constructor() {
      * val manager = KikurageBluetoothManager()
      * manager.checkPermission(this.requireActivity())
      */
-    fun checkPermission(activity: Activity) {
+    override fun checkPermission(activity: Activity) {
         if (isSupported()) {
             val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
             if (ActivityCompat.checkSelfPermission(
@@ -53,7 +57,7 @@ class KikurageBluetoothManager @Inject constructor() {
         }
         delegate?.didFinishCheckPermissions(this)
     }
-    fun getPairedDevices(): PairedDeviceList {
+    override fun getPairedDevices(): PairedDeviceList {
         val pairedDevice = _bluetoothAdapter?.bondedDevices
         val pairedDeviceList = PairedDeviceList()
 
@@ -68,7 +72,7 @@ class KikurageBluetoothManager @Inject constructor() {
     //endregion
 
     //region Scan
-    fun scanForPeripherals() {
+    override fun scanForPeripherals() {
         _bluetoothAdapter?.startDiscovery()
     }
 
