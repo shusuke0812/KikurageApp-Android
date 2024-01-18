@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.core.DataStoreFactory
 import androidx.datastore.dataStoreFile
+import androidx.lifecycle.ViewModel
 import com.shusuke.kikurage.LoginUserPrefs
 import com.shusuke.kikurage.constant.Constants
 import com.shusuke.kikurage.repository.KikurageStateRepository
@@ -15,6 +16,7 @@ import com.shusuke.kikurage.repository.LoginRepositoryInterface
 import com.shusuke.kikurage.usecase.LoadKikurageStateWithUserUseCase
 import com.shusuke.kikurage.usecase.LoadKikurageStateWithUserUseCaseInterface
 import com.shusuke.kikurage.utility.LoginUserPrefsSerializer
+import com.shusuke.kikurage.utility.bluetooth.KikurageBluetoothManager
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -42,6 +44,16 @@ object AppModule {
         ) {
             context.dataStoreFile(Constants.ProtoDataStore.LOGIN_USER_FILE_NAME)
         }
+    }
+}
+
+@Module
+@InstallIn(SingletonComponent::class)
+object BluetoothModule {
+    @Singleton
+    @Provides
+    fun provideBluetoothManager(viewModel: ViewModel): KikurageBluetoothManager {
+        return KikurageBluetoothManager()
     }
 }
 

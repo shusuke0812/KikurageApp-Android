@@ -12,17 +12,19 @@ import androidx.core.app.ActivityCompat
 import com.shusuke.kikurage.utility.bluetooth.entity.DiscoveredDevice
 import com.shusuke.kikurage.utility.bluetooth.entity.PairedDevice
 import com.shusuke.kikurage.utility.bluetooth.entity.PairedDeviceList
+import javax.inject.Inject
+import javax.inject.Singleton
 
 interface KikurageBluetoothManagerDelegate {
     fun didFinishCheckPermissions(manage: KikurageBluetoothManager)
     fun didDiscoverDevice(manager: KikurageBluetoothManager, device: DiscoveredDevice)
 }
 
+@Singleton
 @SuppressLint("MissingPermission")
-class KikurageBluetoothManager(
-    private val _bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter(),
+class KikurageBluetoothManager @Inject constructor() {
+    private val _bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
     var delegate: KikurageBluetoothManagerDelegate? = null
-) {
     //region Config
     private fun isSupported(): Boolean {
         return _bluetoothAdapter != null && !_bluetoothAdapter.isEnabled
