@@ -69,7 +69,7 @@ abstract class RepositoryModule {
 abstract class UseCaseModule {
     @Singleton
     @Binds
-    abstract fun loadKikurageStateWithUserUseCaseInterface(loadKikurageStateWithUserUseCase : LoadKikurageStateWithUserUseCase) : LoadKikurageStateWithUserUseCaseInterface
+    abstract fun bindLoadKikurageStateWithUserUseCaseInterface(loadKikurageStateWithUserUseCase : LoadKikurageStateWithUserUseCase) : LoadKikurageStateWithUserUseCaseInterface
 }
 
 @Module
