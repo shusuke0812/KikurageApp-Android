@@ -1,23 +1,21 @@
 package com.shusuke.kikurage.utility.bluetooth
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
-import androidx.core.app.ActivityCompat
 import com.shusuke.kikurage.utility.bluetooth.entity.DiscoveredDevice
 import com.shusuke.kikurage.utility.bluetooth.entity.PairedDevice
 import com.shusuke.kikurage.utility.bluetooth.entity.PairedDeviceList
 import javax.inject.Inject
 
 interface KikurageBluetoothManagerInterface {
-    fun checkPermission(activity: Activity)
+    fun isSupported(): Boolean
     fun getPairedDevices(): PairedDeviceList
     fun scanForPeripherals()
+    var delegate: KikurageBluetoothManagerDelegate?
 }
 
 interface KikurageBluetoothManagerDelegate {
@@ -28,35 +26,13 @@ interface KikurageBluetoothManagerDelegate {
 @SuppressLint("MissingPermission")
 class KikurageBluetoothManager @Inject constructor() : KikurageBluetoothManagerInterface {
     private val _bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
-    var delegate: KikurageBluetoothManagerDelegate? = null
+    override var delegate: KikurageBluetoothManagerDelegate? = null
+
     //region Config
-    private fun isSupported(): Boolean {
+    override fun isSupported(): Boolean {
         return _bluetoothAdapter != null && !_bluetoothAdapter.isEnabled
     }
 
-    /**
-     * Usage: In Fragment,
-     * val manager = KikurageBluetoothManager()
-     * manager.checkPermission(this.requireActivity())
-     */
-    override fun checkPermission(activity: Activity) {
-        if (isSupported()) {
-            val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
-            if (ActivityCompat.checkSelfPermission(
-                    activity,
-                    android.Manifest.permission.BLUETOOTH_CONNECT
-                ) != PackageManager.PERMISSION_GRANTED
-            ) {
-                activity.requestPermissions(arrayOf(android.Manifest.permission.BLUETOOTH_CONNECT), 2)
-                delegate?.didFinishCheckPermissions(this)
-                return
-            }
-            activity.startActivityForResult(enableBtIntent, 1)
-            delegate?.didFinishCheckPermissions(this)
-            return
-        }
-        delegate?.didFinishCheckPermissions(this)
-    }
     override fun getPairedDevices(): PairedDeviceList {
         val pairedDevice = _bluetoothAdapter?.bondedDevices
         val pairedDeviceList = PairedDeviceList()
@@ -75,7 +51,6 @@ class KikurageBluetoothManager @Inject constructor() : KikurageBluetoothManagerI
     override fun scanForPeripherals() {
         _bluetoothAdapter?.startDiscovery()
     }
-
 
     private val receiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
