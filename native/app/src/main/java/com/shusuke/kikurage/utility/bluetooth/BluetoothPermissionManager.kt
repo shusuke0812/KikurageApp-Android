@@ -14,6 +14,10 @@ interface BluetoothPermissionManagerInterface {
 }
 
 class BluetoothPermissionManager @Inject constructor() : BluetoothPermissionManagerInterface {
+    private enum class RequestCode(val value: Int) {
+        PERMISSION(2)
+    }
+
     override fun hasConnectPermission(context: Context): Boolean {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             ContextCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED &&
@@ -39,6 +43,7 @@ class BluetoothPermissionManager @Inject constructor() : BluetoothPermissionMana
             permissions.plus(Manifest.permission.BLUETOOTH_CONNECT)
             permissions.plus(Manifest.permission.BLUETOOTH_SCAN)
         }
-        activity.requestPermissions(permissions, 2)
+        
+        activity.requestPermissions(permissions, RequestCode.PERMISSION.value)
     }
 }
