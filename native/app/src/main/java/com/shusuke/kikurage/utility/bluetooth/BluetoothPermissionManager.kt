@@ -16,8 +16,7 @@ interface BluetoothPermissionManagerInterface {
 class BluetoothPermissionManager @Inject constructor() : BluetoothPermissionManagerInterface {
     override fun hasConnectPermission(context: Context): Boolean {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
-                    ContextCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED &&
+            ContextCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED &&
                     ContextCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_SCAN) == PackageManager.PERMISSION_GRANTED
         } else {
             ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
@@ -28,22 +27,18 @@ class BluetoothPermissionManager @Inject constructor() : BluetoothPermissionMana
      * Usage: In Fragment,
      * val manager = BluetoothPermissionManager()
      * manager.checkPermission(this.requireActivity())
+     *
+     * Note:
+     * https://developer.android.com/develop/connectivity/bluetooth/bt-permissions?hl=ja#declare-android12-or-higher
      */
     override fun requestPermissions(activity: Activity) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            val permissions = arrayOf(
-                Manifest.permission.BLUETOOTH,
-                Manifest.permission.BLUETOOTH_ADMIN,
-                Manifest.permission.ACCESS_COARSE_LOCATION,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            )
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                permissions.plus(Manifest.permission.BLUETOOTH_CONNECT)
-                permissions.plus(Manifest.permission.BLUETOOTH_SCAN)
-            }
-
-            activity.requestPermissions(permissions, 2)
+        val permissions = arrayOf(Manifest.permission.BLUETOOTH, Manifest.permission.BLUETOOTH_ADMIN)
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) {
+            permissions.plus(Manifest.permission.ACCESS_FINE_LOCATION)
+        } else {
+            permissions.plus(Manifest.permission.BLUETOOTH_CONNECT)
+            permissions.plus(Manifest.permission.BLUETOOTH_SCAN)
         }
+        activity.requestPermissions(permissions, 2)
     }
 }
