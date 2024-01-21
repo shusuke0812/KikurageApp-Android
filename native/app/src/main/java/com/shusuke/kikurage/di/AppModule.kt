@@ -16,6 +16,8 @@ import com.shusuke.kikurage.repository.LoginRepositoryInterface
 import com.shusuke.kikurage.usecase.LoadKikurageStateWithUserUseCase
 import com.shusuke.kikurage.usecase.LoadKikurageStateWithUserUseCaseInterface
 import com.shusuke.kikurage.utility.LoginUserPrefsSerializer
+import com.shusuke.kikurage.utility.bluetooth.BluetoothPermissionManager
+import com.shusuke.kikurage.utility.bluetooth.BluetoothPermissionManagerInterface
 import com.shusuke.kikurage.utility.bluetooth.KikurageBluetoothManager
 import com.shusuke.kikurage.utility.bluetooth.KikurageBluetoothManagerInterface
 import dagger.Binds
@@ -78,4 +80,8 @@ abstract class BluetoothModule {
     @Singleton
     @Binds
     abstract fun bindBluetoothManagerInterface(bluetoothManager: KikurageBluetoothManager): KikurageBluetoothManagerInterface
+
+    @Singleton
+    @Binds
+    abstract fun bindBluetoothPermissionManagerInterfacce(bluetoothPermissionManager: BluetoothPermissionManager) : BluetoothPermissionManagerInterface
 }
