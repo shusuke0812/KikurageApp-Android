@@ -43,7 +43,7 @@ class BluetoothPermissionManager @Inject constructor() : BluetoothPermissionMana
             permissions.plus(Manifest.permission.BLUETOOTH_CONNECT)
             permissions.plus(Manifest.permission.BLUETOOTH_SCAN)
         }
-        
+
         activity.requestPermissions(permissions, RequestCode.PERMISSION.value)
     }
 }
