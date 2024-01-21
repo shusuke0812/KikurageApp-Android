@@ -11,22 +11,21 @@ import com.shusuke.kikurage.utility.bluetooth.entity.PairedDevice
 import com.shusuke.kikurage.utility.bluetooth.entity.PairedDeviceList
 import javax.inject.Inject
 
-interface KikurageBluetoothManagerInterface {
+interface BluetoothManagerInterface {
     fun isSupported(): Boolean
     fun getPairedDevices(): PairedDeviceList
     fun scanForPeripherals()
-    var delegate: KikurageBluetoothManagerDelegate?
+    var delegate: BluetoothManagerDelegate?
 }
 
-interface KikurageBluetoothManagerDelegate {
-    fun didFinishCheckPermissions(manage: KikurageBluetoothManager)
-    fun didDiscoverDevice(manager: KikurageBluetoothManager, device: DiscoveredDevice)
+interface BluetoothManagerDelegate {
+    fun didDiscoverDevice(manager: BluetoothManager, device: DiscoveredDevice)
 }
 
 @SuppressLint("MissingPermission")
-class KikurageBluetoothManager @Inject constructor() : KikurageBluetoothManagerInterface {
+class BluetoothManager @Inject constructor() : BluetoothManagerInterface {
     private val _bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
-    override var delegate: KikurageBluetoothManagerDelegate? = null
+    override var delegate: BluetoothManagerDelegate? = null
 
     //region Config
     override fun isSupported(): Boolean {
@@ -60,7 +59,7 @@ class KikurageBluetoothManager @Inject constructor() : KikurageBluetoothManagerI
                     val deviceName = device?.name ?: ""
                     val deviceMacAddress = device?.address ?: ""
                     val discoveredDevice = DiscoveredDevice(name = deviceName, macAddress = deviceMacAddress)
-                    delegate?.didDiscoverDevice(this@KikurageBluetoothManager, discoveredDevice)
+                    delegate?.didDiscoverDevice(this@BluetoothManager, discoveredDevice)
                 }
             }
         }
