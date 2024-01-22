@@ -36,12 +36,12 @@ class BluetoothPermissionManager @Inject constructor() : BluetoothPermissionMana
      * https://developer.android.com/develop/connectivity/bluetooth/bt-permissions?hl=ja#declare-android12-or-higher
      */
     override fun requestPermissions(activity: Activity) {
-        val permissions = arrayOf(Manifest.permission.BLUETOOTH, Manifest.permission.BLUETOOTH_ADMIN)
+        var permissions = arrayOf(Manifest.permission.BLUETOOTH, Manifest.permission.BLUETOOTH_ADMIN)
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) {
-            permissions.plus(Manifest.permission.ACCESS_FINE_LOCATION)
+            permissions += Manifest.permission.ACCESS_FINE_LOCATION
         } else {
-            permissions.plus(Manifest.permission.BLUETOOTH_CONNECT)
-            permissions.plus(Manifest.permission.BLUETOOTH_SCAN)
+            permissions += Manifest.permission.BLUETOOTH_CONNECT
+            permissions += Manifest.permission.BLUETOOTH_SCAN
         }
 
         activity.requestPermissions(permissions, RequestCode.PERMISSION.value)
