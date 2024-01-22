@@ -1,18 +1,22 @@
 package com.shusuke.kikurage.utility.bluetooth
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import com.shusuke.kikurage.utility.bluetooth.entity.DiscoveredDevice
 import com.shusuke.kikurage.utility.bluetooth.entity.PairedDevice
 import com.shusuke.kikurage.utility.bluetooth.entity.PairedDeviceList
 import javax.inject.Inject
 
 interface BluetoothManagerInterface {
-    fun isSupported(): Boolean
+    fun isEnabled(): Boolean
+    fun requestBluetoothFeature(activity: Activity)
+    fun registerReceiver(context: Context)
     fun getPairedDevices(): PairedDeviceList
     fun scanForPeripherals()
     var delegate: BluetoothManagerDelegate?
@@ -28,8 +32,13 @@ class BluetoothManager @Inject constructor() : BluetoothManagerInterface {
     override var delegate: BluetoothManagerDelegate? = null
 
     //region Config
-    override fun isSupported(): Boolean {
-        return _bluetoothAdapter != null && !_bluetoothAdapter.isEnabled
+    override fun isEnabled(): Boolean {
+        return _bluetoothAdapter != null && _bluetoothAdapter.isEnabled
+    }
+
+    override fun requestBluetoothFeature(activity: Activity) {
+        val enabledIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
+        activity.startActivity(enabledIntent)
     }
 
     override fun getPairedDevices(): PairedDeviceList {
@@ -43,6 +52,11 @@ class BluetoothManager @Inject constructor() : BluetoothManagerInterface {
             pairedDeviceList.items.add(pairedDevice)
         }
         return pairedDeviceList
+    }
+
+    override fun registerReceiver(context: Context) {
+        val filter = IntentFilter(BluetoothDevice.ACTION_FOUND)
+        context.registerReceiver(receiver, filter)
     }
     //endregion
 
