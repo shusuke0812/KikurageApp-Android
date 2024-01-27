@@ -38,7 +38,7 @@ class KikurageBluetoothManager @Inject constructor(
 
     //region Config
     fun isEnabled(): Boolean {
-        return bluetoothAdapter != null && bluetoothAdapter.isEnabled
+        return bluetoothAdapter.isEnabled
     }
 
     fun requestBluetoothFeature(activity: Activity) {
@@ -47,7 +47,7 @@ class KikurageBluetoothManager @Inject constructor(
     }
 
     fun getPairedDevices(): PairedDeviceList {
-        val pairedDevice = bluetoothAdapter?.bondedDevices
+        val pairedDevice = bluetoothAdapter.bondedDevices
         val pairedDeviceList = PairedDeviceList()
 
         pairedDevice?.forEach { device ->
@@ -67,7 +67,7 @@ class KikurageBluetoothManager @Inject constructor(
 
     //region Scan
     fun scanForPeripherals() {
-        bluetoothAdapter?.startDiscovery()
+        bluetoothAdapter.startDiscovery()
     }
 
     private val receiver = object : BroadcastReceiver() {
