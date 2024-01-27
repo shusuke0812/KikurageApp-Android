@@ -70,6 +70,10 @@ class KikurageBluetoothManager @Inject constructor(
         bluetoothAdapter.startDiscovery()
     }
 
+    fun stopScan() {
+        bluetoothAdapter.cancelDiscovery()
+    }
+
     private val receiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             when (intent?.action) {
