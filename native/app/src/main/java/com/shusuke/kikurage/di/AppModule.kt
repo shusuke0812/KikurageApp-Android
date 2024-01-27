@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.core.DataStoreFactory
 import androidx.datastore.dataStoreFile
-import androidx.lifecycle.ViewModel
 import com.shusuke.kikurage.LoginUserPrefs
 import com.shusuke.kikurage.constant.Constants
 import com.shusuke.kikurage.repository.KikurageStateRepository
@@ -18,8 +17,7 @@ import com.shusuke.kikurage.usecase.LoadKikurageStateWithUserUseCaseInterface
 import com.shusuke.kikurage.utility.LoginUserPrefsSerializer
 import com.shusuke.kikurage.utility.bluetooth.BluetoothPermissionManager
 import com.shusuke.kikurage.utility.bluetooth.BluetoothPermissionManagerInterface
-import com.shusuke.kikurage.utility.bluetooth.BluetoothManager
-import com.shusuke.kikurage.utility.bluetooth.BluetoothManagerInterface
+import com.shusuke.kikurage.utility.bluetooth.KikurageBluetoothManager
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -76,12 +74,18 @@ abstract class UseCaseModule {
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class BluetoothModule {
-    @Singleton
-    @Binds
-    abstract fun bindBluetoothManagerInterface(bluetoothManager: BluetoothManager): BluetoothManagerInterface
-
+abstract class BluetoothPermissionModule {
     @Singleton
     @Binds
     abstract fun bindBluetoothPermissionManagerInterfacce(bluetoothPermissionManager: BluetoothPermissionManager) : BluetoothPermissionManagerInterface
+}
+
+@Module
+@InstallIn(SingletonComponent::class)
+object BluetoothModule {
+    @Singleton
+    @Provides
+    fun provideKikurageBluetoothManager(@ApplicationContext context: Context): KikurageBluetoothManager {
+        return KikurageBluetoothManager(context)
+    }
 }

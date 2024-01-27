@@ -2,8 +2,10 @@ package com.shusuke.kikurage.utility.bluetooth
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.bluetooth.BluetoothManager
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
+import android.bluetooth.le.BluetoothLeScanner
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -11,38 +13,41 @@ import android.content.IntentFilter
 import com.shusuke.kikurage.utility.bluetooth.entity.DiscoveredDevice
 import com.shusuke.kikurage.utility.bluetooth.entity.PairedDevice
 import com.shusuke.kikurage.utility.bluetooth.entity.PairedDeviceList
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
-interface BluetoothManagerInterface {
-    fun isEnabled(): Boolean
-    fun requestBluetoothFeature(activity: Activity)
-    fun registerReceiver(context: Context)
-    fun getPairedDevices(): PairedDeviceList
-    fun scanForPeripherals()
-    var delegate: BluetoothManagerDelegate?
-}
-
-interface BluetoothManagerDelegate {
-    fun didDiscoverDevice(manager: BluetoothManager, device: DiscoveredDevice)
+interface KikurageBluetoothManagerDelegate {
+    fun didDiscoverDevice(manager: KikurageBluetoothManager, device: DiscoveredDevice)
 }
 
 @SuppressLint("MissingPermission")
-class BluetoothManager @Inject constructor() : BluetoothManagerInterface {
-    private val _bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
-    override var delegate: BluetoothManagerDelegate? = null
+class KikurageBluetoothManager @Inject constructor(
+    @ApplicationContext context: Context
+) {
+    private val bluetoothManager: BluetoothManager
+    private val bluetoothAdapter: BluetoothAdapter
+    private val bluetoothScanner: BluetoothLeScanner
 
-    //region Config
-    override fun isEnabled(): Boolean {
-        return _bluetoothAdapter != null && _bluetoothAdapter.isEnabled
+    init {
+        bluetoothManager = context.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
+        bluetoothAdapter = bluetoothManager.adapter
+        bluetoothScanner = bluetoothAdapter.bluetoothLeScanner
     }
 
-    override fun requestBluetoothFeature(activity: Activity) {
+    var delegate: KikurageBluetoothManagerDelegate? = null
+
+    //region Config
+    fun isEnabled(): Boolean {
+        return bluetoothAdapter != null && bluetoothAdapter.isEnabled
+    }
+
+    fun requestBluetoothFeature(activity: Activity) {
         val enabledIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
         activity.startActivity(enabledIntent)
     }
 
-    override fun getPairedDevices(): PairedDeviceList {
-        val pairedDevice = _bluetoothAdapter?.bondedDevices
+    fun getPairedDevices(): PairedDeviceList {
+        val pairedDevice = bluetoothAdapter?.bondedDevices
         val pairedDeviceList = PairedDeviceList()
 
         pairedDevice?.forEach { device ->
@@ -54,15 +59,15 @@ class BluetoothManager @Inject constructor() : BluetoothManagerInterface {
         return pairedDeviceList
     }
 
-    override fun registerReceiver(context: Context) {
+    fun registerReceiver(context: Context) {
         val filter = IntentFilter(BluetoothDevice.ACTION_FOUND)
         context.registerReceiver(receiver, filter)
     }
     //endregion
 
     //region Scan
-    override fun scanForPeripherals() {
-        _bluetoothAdapter?.startDiscovery()
+    fun scanForPeripherals() {
+        bluetoothAdapter?.startDiscovery()
     }
 
     private val receiver = object : BroadcastReceiver() {
@@ -73,7 +78,7 @@ class BluetoothManager @Inject constructor() : BluetoothManagerInterface {
                     val deviceName = device?.name ?: ""
                     val deviceMacAddress = device?.address ?: ""
                     val discoveredDevice = DiscoveredDevice(name = deviceName, macAddress = deviceMacAddress)
-                    delegate?.didDiscoverDevice(this@BluetoothManager, discoveredDevice)
+                    delegate?.didDiscoverDevice(this@KikurageBluetoothManager, discoveredDevice)
                 }
             }
         }

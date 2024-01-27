@@ -3,17 +3,16 @@ package com.shusuke.kikurage.screen.sidemenu.wifi.selectdevice
 import android.app.Activity
 import androidx.lifecycle.ViewModel
 import com.shusuke.kikurage.utility.CustomTimber
-import com.shusuke.kikurage.utility.bluetooth.BluetoothManager
-import com.shusuke.kikurage.utility.bluetooth.BluetoothManagerDelegate
-import com.shusuke.kikurage.utility.bluetooth.BluetoothManagerInterface
+import com.shusuke.kikurage.utility.bluetooth.KikurageBluetoothManager
+import com.shusuke.kikurage.utility.bluetooth.KikurageBluetoothManagerDelegate
 import com.shusuke.kikurage.utility.bluetooth.entity.DiscoveredDevice
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class WiFiSelectDeviceViewModel @Inject constructor(
-    private val bluetoothManager: BluetoothManagerInterface
-) : ViewModel(), BluetoothManagerDelegate {
+    private val bluetoothManager: KikurageBluetoothManager
+) : ViewModel(), KikurageBluetoothManagerDelegate {
     init {
         bluetoothManager.delegate = this
     }
@@ -33,7 +32,7 @@ class WiFiSelectDeviceViewModel @Inject constructor(
         bluetoothManager.scanForPeripherals()
     }
 
-    override fun didDiscoverDevice(manager: BluetoothManager, device: DiscoveredDevice) {
+    override fun didDiscoverDevice(manager: KikurageBluetoothManager, device: DiscoveredDevice) {
         CustomTimber.d("device=$device")
     }
 }
