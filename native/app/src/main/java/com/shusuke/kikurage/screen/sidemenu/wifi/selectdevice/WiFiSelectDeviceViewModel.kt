@@ -29,6 +29,6 @@ class WiFiSelectDeviceViewModel @Inject constructor(
     }
 
     override fun didDiscoverDevice(manager: KikurageBluetoothManager, device: DiscoveredDevice) {
-        CustomTimber.d("device=$device")
+        CustomTimber.d("device=${device.name}, ${device.address}")
     }
 }

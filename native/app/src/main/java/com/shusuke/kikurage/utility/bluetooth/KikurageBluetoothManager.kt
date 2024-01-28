@@ -78,11 +78,9 @@ class KikurageBluetoothManager @Inject constructor(
     private val leScanCallback: ScanCallback = object : ScanCallback() {
         override fun onScanResult(callbackType: Int, result: ScanResult?) {
             super.onScanResult(callbackType, result)
-            val device = result?.device
-            val deviceName = device?.name ?: ""
-            val deviceMacAddress = device?.address ?: ""
-            val discoveredDevice = DiscoveredDevice(name = deviceName, macAddress = deviceMacAddress)
-            delegate?.didDiscoverDevice(this@KikurageBluetoothManager, discoveredDevice)
+            result?.device?.let {
+                delegate?.didDiscoverDevice(this@KikurageBluetoothManager, DiscoveredDevice(it))
+            }
         }
     }
     //endregion
