@@ -26,7 +26,6 @@ class WiFiSelectDeviceFragment : Fragment() {
         viewModel = ViewModelProvider(requireActivity())[WiFiSelectDeviceViewModel::class.java]
 
         // Bluetooth
-        viewModel.registerBluetoothReceiver(requireActivity())
         viewModel.scanForPeripherals()
     }
 }

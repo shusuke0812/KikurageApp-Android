@@ -24,10 +24,6 @@ class WiFiSelectDeviceViewModel @Inject constructor(
         }
     }
 
-    fun registerBluetoothReceiver(activity: Activity) {
-        bluetoothManager.registerReceiver(activity)
-    }
-
     fun scanForPeripherals() {
         bluetoothManager.scanForPeripherals()
     }

@@ -4,12 +4,12 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.bluetooth.BluetoothManager
 import android.bluetooth.BluetoothAdapter
-import android.bluetooth.BluetoothDevice
 import android.bluetooth.le.BluetoothLeScanner
-import android.content.BroadcastReceiver
+import android.bluetooth.le.ScanCallback
+import android.bluetooth.le.ScanResult
 import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
+import android.os.Handler
 import com.shusuke.kikurage.utility.bluetooth.entity.DiscoveredDevice
 import com.shusuke.kikurage.utility.bluetooth.entity.PairedDevice
 import com.shusuke.kikurage.utility.bluetooth.entity.PairedDeviceList
@@ -36,6 +36,9 @@ class KikurageBluetoothManager @Inject constructor(
 
     var delegate: KikurageBluetoothManagerDelegate? = null
 
+    private val handler = Handler()
+    private val SCAN_PERIOD: Long = 10000 // ms
+
     //region Config
     fun isEnabled(): Boolean {
         return bluetoothAdapter.isEnabled
@@ -58,33 +61,28 @@ class KikurageBluetoothManager @Inject constructor(
         }
         return pairedDeviceList
     }
-
-    fun registerReceiver(context: Context) {
-        val filter = IntentFilter(BluetoothDevice.ACTION_FOUND)
-        context.registerReceiver(receiver, filter)
-    }
     //endregion
 
     //region Scan
     fun scanForPeripherals() {
-        bluetoothAdapter.startDiscovery()
+        bluetoothScanner.startScan(leScanCallback)
+        handler.postDelayed({ // To prevent drains the battery
+            stopScan()
+        }, SCAN_PERIOD)
     }
 
     fun stopScan() {
-        bluetoothAdapter.cancelDiscovery()
+        bluetoothScanner.stopScan(leScanCallback)
     }
 
-    private val receiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context?, intent: Intent?) {
-            when (intent?.action) {
-                BluetoothDevice.ACTION_FOUND -> {
-                    val device: BluetoothDevice? = intent?.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE)
-                    val deviceName = device?.name ?: ""
-                    val deviceMacAddress = device?.address ?: ""
-                    val discoveredDevice = DiscoveredDevice(name = deviceName, macAddress = deviceMacAddress)
-                    delegate?.didDiscoverDevice(this@KikurageBluetoothManager, discoveredDevice)
-                }
-            }
+    private val leScanCallback: ScanCallback = object : ScanCallback() {
+        override fun onScanResult(callbackType: Int, result: ScanResult?) {
+            super.onScanResult(callbackType, result)
+            val device = result?.device
+            val deviceName = device?.name ?: ""
+            val deviceMacAddress = device?.address ?: ""
+            val discoveredDevice = DiscoveredDevice(name = deviceName, macAddress = deviceMacAddress)
+            delegate?.didDiscoverDevice(this@KikurageBluetoothManager, discoveredDevice)
         }
     }
     //endregion
