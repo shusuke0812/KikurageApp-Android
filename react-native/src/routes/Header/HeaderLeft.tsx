@@ -1,7 +1,7 @@
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {DrawerActions} from '@react-navigation/routers';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 import {COLOR} from '../../constants/theme';
 
 function HeaderLeft() {
@@ -11,7 +11,7 @@ function HeaderLeft() {
   }, [dispatch]);
 
   return (
-    <Icon.Button
+    <AntDesign.Button
       name="bars"
       color={COLOR.BLACK}
       backgroundColor={COLOR.WHITE}
