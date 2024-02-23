@@ -1,5 +1,6 @@
 package com.shusuke.kikurage.utility.bluetooth
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.bluetooth.BluetoothManager
@@ -10,6 +11,8 @@ import android.bluetooth.le.ScanResult
 import android.content.Context
 import android.content.Intent
 import android.os.Handler
+import androidx.annotation.RequiresPermission
+import com.shusuke.kikurage.utility.CustomTimber
 import com.shusuke.kikurage.utility.bluetooth.entity.DiscoveredDevice
 import com.shusuke.kikurage.utility.bluetooth.entity.PairedDevice
 import com.shusuke.kikurage.utility.bluetooth.entity.PairedDeviceList
@@ -64,6 +67,7 @@ class KikurageBluetoothManager @Inject constructor(
     //endregion
 
     //region Scan
+    @RequiresPermission(allOf = [Manifest.permission.BLUETOOTH_SCAN, Manifest.permission.BLUETOOTH_CONNECT])
     fun scanForPeripherals() {
         bluetoothScanner.startScan(leScanCallback)
         handler.postDelayed({ // To prevent drains the battery
