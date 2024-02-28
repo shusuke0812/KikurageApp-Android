@@ -7,6 +7,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.navigation.NavigationView
 import com.shusuke.kikurage.R
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -17,6 +18,7 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
 
         setupToolbar()
+        setupDrawerItemSelectedListner()
     }
 
     private fun setupToolbar() {
@@ -33,7 +35,26 @@ class HomeActivity : AppCompatActivity() {
         navController?.addOnDestinationChangedListener { _, destination, _ ->
             when(destination.id) {
                 R.id.homeFragment -> supportActionBar?.setTitle(R.string.fragment_home_title)
+                R.id.wifiSelectDeviceFragment -> supportActionBar?.setTitle(R.string.menu_wifi_select_device_title)
             }
         }
+    }
+
+    private fun setupDrawerItemSelectedListner() {
+        val drawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
+        val navigationView = findViewById<NavigationView>(R.id.navigation_view)
+        navigationView.setNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.drawer_menu_wifi_setting -> { transitionToMenuItem(R.id.action_homeDrawer_to_wifiSelectDeviceFragment) }
+            }
+            drawerLayout.closeDrawer(navigationView)
+            true
+        }
+    }
+
+    private fun transitionToMenuItem(id: Int) {
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.home_navigation_host_fragment)
+        val navController = navHostFragment?.findNavController()
+        navController?.navigate(id)
     }
 }

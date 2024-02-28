@@ -15,6 +15,9 @@ import com.shusuke.kikurage.repository.LoginRepositoryInterface
 import com.shusuke.kikurage.usecase.LoadKikurageStateWithUserUseCase
 import com.shusuke.kikurage.usecase.LoadKikurageStateWithUserUseCaseInterface
 import com.shusuke.kikurage.utility.LoginUserPrefsSerializer
+import com.shusuke.kikurage.utility.bluetooth.BluetoothPermissionManager
+import com.shusuke.kikurage.utility.bluetooth.BluetoothPermissionManagerInterface
+import com.shusuke.kikurage.utility.bluetooth.KikurageBluetoothManager
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -66,5 +69,23 @@ abstract class RepositoryModule {
 abstract class UseCaseModule {
     @Singleton
     @Binds
-    abstract fun loadKikurageStateWithUserUseCaseInterface(loadKikurageStateWithUserUseCase : LoadKikurageStateWithUserUseCase) : LoadKikurageStateWithUserUseCaseInterface
+    abstract fun bindLoadKikurageStateWithUserUseCaseInterface(loadKikurageStateWithUserUseCase : LoadKikurageStateWithUserUseCase) : LoadKikurageStateWithUserUseCaseInterface
+}
+
+@Module
+@InstallIn(SingletonComponent::class)
+abstract class BluetoothPermissionModule {
+    @Singleton
+    @Binds
+    abstract fun bindBluetoothPermissionManagerInterfacce(bluetoothPermissionManager: BluetoothPermissionManager) : BluetoothPermissionManagerInterface
+}
+
+@Module
+@InstallIn(SingletonComponent::class)
+object BluetoothModule {
+    @Singleton
+    @Provides
+    fun provideKikurageBluetoothManager(@ApplicationContext context: Context): KikurageBluetoothManager {
+        return KikurageBluetoothManager(context)
+    }
 }

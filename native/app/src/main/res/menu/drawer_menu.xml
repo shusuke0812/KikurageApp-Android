@@ -2,6 +2,6 @@
 <menu
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/wifiSettingFragment"
+        android:id="@+id/drawer_menu_wifi_setting"
         android:title="@string/menu_wifi_setting_title" />
 </menu>
