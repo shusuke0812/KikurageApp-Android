@@ -2,6 +2,7 @@ package com.shusuke.kikurage.screen.home
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.addCallback
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -19,6 +20,10 @@ class HomeActivity : AppCompatActivity() {
 
         setupToolbar()
         setupDrawerItemSelectedListner()
+
+        onBackPressedDispatcher.addCallback {
+            // Do nothing. Disable edge swipe gesture.
+        }
     }
 
     private fun setupToolbar() {
