@@ -6,7 +6,9 @@ import android.bluetooth.BluetoothManager
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.le.BluetoothLeScanner
 import android.bluetooth.le.ScanCallback
+import android.bluetooth.le.ScanFilter
 import android.bluetooth.le.ScanResult
+import android.bluetooth.le.ScanSettings
 import android.content.Context
 import android.content.Intent
 import android.os.Handler
@@ -65,7 +67,13 @@ class KikurageBluetoothManager @Inject constructor(
 
     //region Scan
     fun scanForPeripherals() {
-        bluetoothScanner.startScan(leScanCallback)
+        val filter = ScanFilter.Builder()
+            .setServiceUuid(KBluetoothUUID.Service.m5Stack.parcelUuid)
+            .build()
+        val settings = ScanSettings.Builder()
+            .setScanMode(ScanSettings.SCAN_MODE_LOW_POWER)
+            .build()
+        bluetoothScanner.startScan(listOf(filter), settings, leScanCallback)
         handler.postDelayed({ // To prevent drains the battery
             stopScan()
         }, SCAN_PERIOD)
