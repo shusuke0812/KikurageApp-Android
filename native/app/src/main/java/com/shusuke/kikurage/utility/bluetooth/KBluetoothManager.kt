@@ -18,12 +18,12 @@ import com.shusuke.kikurage.utility.bluetooth.entity.PairedDeviceList
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
-interface KikurageBluetoothManagerDelegate {
-    fun didDiscoverDevice(manager: KikurageBluetoothManager, device: DiscoveredDevice)
+interface KBluetoothManagerDelegate {
+    fun didDiscoverDevice(manager: KBluetoothManager, device: DiscoveredDevice)
 }
 
 @SuppressLint("MissingPermission")
-class KikurageBluetoothManager @Inject constructor(
+class KBluetoothManager @Inject constructor(
     @ApplicationContext context: Context
 ) {
     private val bluetoothManager: BluetoothManager
@@ -36,7 +36,7 @@ class KikurageBluetoothManager @Inject constructor(
         bluetoothScanner = bluetoothAdapter.bluetoothLeScanner
     }
 
-    var delegate: KikurageBluetoothManagerDelegate? = null
+    var delegate: KBluetoothManagerDelegate? = null
 
     private val handler = Handler()
     private val SCAN_PERIOD: Long = 10000 // ms
@@ -87,7 +87,7 @@ class KikurageBluetoothManager @Inject constructor(
         override fun onScanResult(callbackType: Int, result: ScanResult?) {
             super.onScanResult(callbackType, result)
             result?.device?.let {
-                delegate?.didDiscoverDevice(this@KikurageBluetoothManager, DiscoveredDevice(it))
+                delegate?.didDiscoverDevice(this@KBluetoothManager, DiscoveredDevice(it))
             }
         }
     }
