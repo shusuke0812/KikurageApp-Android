@@ -56,5 +56,11 @@
                 android:textColor="#D3D3D3"
                 android:text="No services"/>
         </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/chevron_right_24px"
+            android:layout_gravity="center_vertical"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
