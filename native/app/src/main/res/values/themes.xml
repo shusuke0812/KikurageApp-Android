@@ -13,6 +13,7 @@
         <item name="android:statusBarColor">@color/primary</item>
         <item name="android:navigationBarColor">#F2F2F7</item>
         <item name="android:fontFamily">@font/m_plus_rounded_1c</item>
+        <item name="android:textColorHint">#3C3C43</item>
     </style>
 
     <style name="roundedCornersImageView" parent="">
