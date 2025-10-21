@@ -17,4 +17,5 @@
     <!-- Menu -->
     <string name="menu_header_title">メニュー</string>
     <string name="menu_wifi_setting_title">WiFi設定</string>
+    <string name="menu_wifi_select_device_title">接続</string>
 </resources>

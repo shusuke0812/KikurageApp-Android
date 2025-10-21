@@ -10,5 +10,14 @@
         android:name="com.shusuke.kikurage.screen.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
+
+        <action
+            android:id="@+id/action_homeDrawer_to_wifiSelectDeviceFragment"
+            app:destination="@+id/wifiSelectDeviceFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/wifiSelectDeviceFragment"
+        android:name="com.shusuke.kikurage.screen.sidemenu.wifi.selectdevice.WiFiSelectDeviceFragment"
+        tools:layout="@layout/fragment_wifi_select_device" />
 </navigation>
