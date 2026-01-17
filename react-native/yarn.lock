@@ -1891,14 +1891,7 @@
     "@sinonjs/commons" "^3.0.0"
 
 "@tsconfig/react-native@^3.0.0":
-  version "3.0.3"
-  resolved "https://registry.yarnpkg.com/@tsconfig/react-native/-/react-native-3.0.3.tgz#38b306639571a0cd025467f90031897b52928986"
-  integrity sha512-3FVk8Uwb5YRwaHW/4dpcYQa5TTJSBXzIHRBDn3l+YmsXqFfcVGii+G8RPboC6I9iGgtUTxKHz3Y+6WDJDwVXnA==
-
-"@types/babel__core@^7.1.14":
-  version "7.20.5"
-  resolved "https://registry.yarnpkg.com/@types/babel__core/-/babel__core-7.20.5.tgz#3df15f27ba85319caa07ba08d0721889bb39c017"
-  integrity sha512-qoQprZvz5wQFJwMDqeseRXWv3rqMvhgpbXFfVyWhbx9X47POIA6i/+dXefEmZKoAgOaTdaIgNSMqMIU61yRyzA==
+  version "3.0.9"
   dependencies:
     "@babel/parser" "^7.20.7"
     "@babel/types" "^7.20.7"
